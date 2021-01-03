@@ -40,6 +40,12 @@ function move($input){
         header('Content-type: application/json');
         print json_encode(read_board(), JSON_PRETTY_PRINT);
 
+        if($x > 6 || $y > 7){
+            header("HTTP/1.1 400 Bad Request");
+            print json_encode(['errormesg'=>"Not valid numbers!"]);
+            exit;
+        }
+
 }
 
 
