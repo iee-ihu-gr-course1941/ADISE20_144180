@@ -29,6 +29,12 @@ function show_board_piece($x,$y) {
 }
 
 function move($input){
+        if($input > 6 || $input > 7){
+            header("HTTP/1.1 400 Bad Request");
+            print json_encode(['errormesg'=>"Not valid numbers!"]);
+            exit;
+        }
+        
         $x = $input['x'];
         $y = $input['y'];
         $piece_color = $input['piece_color'];
@@ -40,11 +46,6 @@ function move($input){
         header('Content-type: application/json');
         print json_encode(read_board(), JSON_PRETTY_PRINT);
 
-        if($x > 6 || $y > 7){
-            header("HTTP/1.1 400 Bad Request");
-            print json_encode(['errormesg'=>"Not valid numbers!"]);
-            exit;
-        }
 
 }
 
