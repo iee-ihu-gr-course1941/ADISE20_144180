@@ -29,6 +29,7 @@ function game_status_update() {
     global $mysqli;
 	$status = read_status();
 	$new_status=null;
+    $p_turn = null;
 	$new_turn=null;
 
 	$st3=$mysqli->prepare('select count(*) as aborted from con4.players WHERE last_action< (NOW() - INTERVAL 15 MINUTE)');
@@ -60,8 +61,8 @@ function game_status_update() {
 
 	    case 2: $new_status='started';
 
-			if($status['p_turn']==null) {
-				$new_turn='R';
+			if($status['p_turn'] == null) {
+				$new_turn='Y';
 			}
 			break;
 	}
