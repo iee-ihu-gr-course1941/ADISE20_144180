@@ -64,17 +64,6 @@ function update_status(data) {
 }
 
 
-
-function game_status_update() {
-
-	clearTimeout(timer);
-	$.ajax({url: "connect4.php/status/",
-		success: update_status,
-		headers: {"X-Token": me.token} });
-}
-
-
-
 function fill_board() {
 	$.ajax({url: "connect4.php/board/",
 		headers: {"X-Token": me.token},
@@ -93,9 +82,13 @@ function move() {
 		data: JSON.stringify({ x: $x, y: $y, piece_color: me.piece_color }),
 		success: result_move,
 		error: login_error
+
 	});
 
+
 }
+
+
 
 function move_result(data){
 	game_status_update();
