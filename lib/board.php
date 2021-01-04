@@ -23,6 +23,11 @@ function read_board()
     return ($res->fetch_all(MYSQLI_ASSOC));
 }
 
+function reset_board() {
+    global $mysqli;
+    $sql = 'call con4.cleaner()';
+    $mysqli->query($sql);
+}
 
 
 function move($input){
