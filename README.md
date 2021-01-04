@@ -1,5 +1,36 @@
 # Connect 4
 
+## Table of Contents
+
+- Περιγραφή API
+   
+   - Methods
+      
+- Board
+     
+      Ανάγνωση Board
+      Αρχικοποίηση Board
+   
+- Piece
+    
+      Ανάγνωση Θέσης/Πιονιού
+      Μεταβολή Θέσης Πιονιού
+
+- Player
+    
+      Ανάγνωση στοιχείων παίκτη
+      Καθορισμός στοιχείων παίκτη
+
+- Status
+    
+      Ανάγνωση κατάστασης παιχνιδιού
+
+- Entities
+
+      Board
+      Players
+      Game_status
+
 ### Requirements
 
 * PHP
