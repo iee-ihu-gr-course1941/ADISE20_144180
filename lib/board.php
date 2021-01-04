@@ -1,7 +1,7 @@
 <?php
 
 function show_board() {
-	
+
 	global $mysqli;
 	$sql = 'select * from con4.board';
 	$st = $mysqli->prepare($sql);
@@ -24,27 +24,39 @@ function read_board()
 }
 
 
-function show_board_piece($x,$y) {
-    show_board_pieces([[ 'x'=>$x, 'y'=>$y]]);
-}
 
 function move($input){
-        if($input > 6 || $input > 7){
+    $x = $input['x'];
+    $y = $input['y'];
+    $piece_color = $input['piece_color'];
+
+        if($piece_color !== "R" and $piece_color !== "Y") {
             header("HTTP/1.1 400 Bad Request");
-            print json_encode(['errormesg'=>"Not valid numbers!"]);
+            print json_encode(['errormesg' => "Invalid color, allowed only 'R' and 'Y'."]);
             exit;
         }
-        
-        $x = $input['x'];
-        $y = $input['y'];
-        $piece_color = $input['piece_color'];
-        global $mysqli;
+
+        if($x > 6 or $y >= 7) {
+            header("HTTP/1.1 400 Bad Request");
+            print json_encode(['errormesg' => "Invalid numbers"]);
+            exit;
+        }
+
+        if($x <= 0 or $y <= 0) {
+            header("HTTP/1.1 400 Bad Request");
+            print json_encode(['errormesg' => "Invalid numbers"]);
+            exit;
+        }
+
+
+    global $mysqli;
         $sql = 'call con4.move(?,?,?)';
         $st = $mysqli->prepare($sql);
         $st->bind_param('iis', $x, $y, $piece_color);
         $st->execute();
         header('Content-type: application/json');
         print json_encode(read_board(), JSON_PRETTY_PRINT);
+
 
 
 }
