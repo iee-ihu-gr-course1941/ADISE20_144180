@@ -3,7 +3,7 @@
 function show_players() {
 
 	global $mysqli;
-	$sql = 'select * from con4.players';
+	$sql = 'select * from ADISE20_144180.players';
 	$st = $mysqli->prepare($sql);
 	$st->execute();
 	$res = $st->get_result();
@@ -16,7 +16,7 @@ function show_players() {
 function show_player($r) {
 
     global $mysqli;
-	$sql = 'select username, piece_color, token from con4.players where con4.piece_color=?';
+	$sql = 'select username, piece_color, token from ADISE20_144180.players where con4.piece_color=?';
 	$st = $mysqli->prepare($sql);
 	$st->bind_param('s',$r);
 	$st->execute();
@@ -39,7 +39,7 @@ function set_user($b, $input) {
 	$username=$input['username'];
 
 	global $mysqli;
-	$sql = 'select count(*) as c from con4.players where piece_color=? and username is not null';
+	$sql = 'select count(*) as c from ADISE20_144180.players where piece_color=? and username is not null';
 	$st = $mysqli->prepare($sql);
 	$st->bind_param('s',$b);
 	$st->execute();
@@ -51,7 +51,7 @@ function set_user($b, $input) {
 		exit;
 	}
 
-	$sql = 'update con4.players set username=?, token=md5(CONCAT( ?, NOW()))  where piece_color=?';
+	$sql = 'update ADISE20_144180.players set username=?, token=md5(CONCAT( ?, NOW()))  where piece_color=?';
 	$st2 = $mysqli->prepare($sql);
 	$st2->bind_param('sss',$username,$username,$b);
 	$st2->execute();
@@ -59,7 +59,7 @@ function set_user($b, $input) {
 
 
     game_status_update();
-	$sql = 'select * from con4.players where piece_color=?';
+	$sql = 'select * from ADISE20_144180.players where piece_color=?';
 	$st = $mysqli->prepare($sql);
 	$st->bind_param('s',$b);
 	$st->execute();
