@@ -129,7 +129,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `move`(IN x int, IN y int, IN piece_color char)
 BEGIN
-	insert into con4.board (x,y,piece_color) values (x,y,piece_color);
+	insert into ADISE20_144180.board (x,y,piece_color) values (x,y,piece_color);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
