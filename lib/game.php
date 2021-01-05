@@ -3,7 +3,7 @@
 function show_status() {
 
 	global $mysqli;
-	$sql = 'select * from con4.status';
+	$sql = 'select * from ADISE20_144180.status';
 	$st = $mysqli->prepare($sql);
 	$st->execute();
 	$res = $st->get_result();
@@ -16,7 +16,7 @@ function show_status() {
 function read_status() {
 
     global $mysqli;
-	$sql = 'select * from con4.status';
+	$sql = 'select * from ADISE20_144180.status';
 	$st = $mysqli->prepare($sql);
 	$st->execute();
 	$res = $st->get_result();
@@ -32,12 +32,12 @@ function game_status_update() {
     $p_turn = null;
 	$new_turn=null;
 
-	$st3=$mysqli->prepare('select count(*) as aborted from con4.players WHERE last_action< (NOW() - INTERVAL 2 MINUTE)');
+	$st3=$mysqli->prepare('select count(*) as aborted from ADISE20_144180.players WHERE last_action< (NOW() - INTERVAL 2 MINUTE)');
 	$st3->execute();
 	$res3 = $st3->get_result();
 	$aborted = $res3->fetch_assoc()['aborted'];
 	if($aborted>0) {
-		$sql = "UPDATE con4.players SET username=NULL, token=NULL WHERE last_action< (NOW() - INTERVAL 2 MINUTE)";
+		$sql = "UPDATE ADISE20_144180.players SET username=NULL, token=NULL WHERE last_action< (NOW() - INTERVAL 2 MINUTE)";
 		$st2 = $mysqli->prepare($sql);
 		$st2->execute();
 		if($status['status']=='started') {
@@ -46,7 +46,7 @@ function game_status_update() {
 	}
 
 
-	$sql = 'select count(*) as c from con4.players where username is not null';
+	$sql = 'select count(*) as c from ADISE20_144180.players where username is not null';
 	$st = $mysqli->prepare($sql);
 	$st->execute();
 	$res = $st->get_result();
@@ -67,7 +67,7 @@ function game_status_update() {
 			break;
 	}
 
-    $sql = 'update con4.status set status=?, p_turn=?';
+    $sql = 'update ADISE20_144180.status set status=?, p_turn=?';
     $st = $mysqli->prepare($sql);
     $st->bind_param('ss',$new_status,$new_turn);
     $st->execute();

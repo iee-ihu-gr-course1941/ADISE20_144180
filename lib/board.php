@@ -3,7 +3,7 @@
 function show_board() {
 
 	global $mysqli;
-	$sql = 'select * from con4.board';
+	$sql = 'select * from ADISE20_144180.board';
 	$st = $mysqli->prepare($sql);
 	$st->execute();
 	$res = $st->get_result();
@@ -16,7 +16,7 @@ function show_board() {
 function read_board()
 {
     global $mysqli;
-    $sql = 'select * from con4.board';
+    $sql = 'select * from ADISE20_144180.board';
     $st = $mysqli->prepare($sql);
     $st->execute();
     $res = $st->get_result();
@@ -25,7 +25,7 @@ function read_board()
 
 function reset_board() {
     global $mysqli;
-    $sql = 'call con4.cleaner()';
+    $sql = 'call ADISE20_144180.cleaner()';
     $mysqli->query($sql);
 }
 
@@ -55,7 +55,7 @@ function move($input){
 
 
     global $mysqli;
-        $sql = 'call con4.move(?,?,?)';
+        $sql = 'call ADISE20_144180.move(?,?,?)';
         $st = $mysqli->prepare($sql);
         $st->bind_param('iis', $x, $y, $piece_color);
         $st->execute();
