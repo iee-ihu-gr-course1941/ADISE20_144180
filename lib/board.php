@@ -27,6 +27,7 @@ function reset_board() {
     global $mysqli;
     $sql = 'call ADISE20_144180.cleaner()';
     $mysqli->query($sql);
+    print json_encode(['mesg' => "Board Cleaned"]);
 }
 
 
